@@ -131,3 +131,4 @@ dmypy.json
 
 # additional .gitignore files or folders
 .vscode
+media/
