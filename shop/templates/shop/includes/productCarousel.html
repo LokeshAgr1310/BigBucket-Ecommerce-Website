@@ -1,0 +1,35 @@
+{% load static %}
+{% load mathfilters %}
+<h2 class="fw-bolder my-3">{{ category }}</h2>
+<div id="productCarousel{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    {% for i in range_slides %}
+      <button type="button" data-bs-target="#productCarousel{{ forloop.parentloop.counter }}" data-bs-slide-to="{{ i }}" class="{% if forloop.first %}active{% endif %} bg-primary" aria-current="true" aria-label="Slide {{ i }}"></button>
+    {% endfor %}
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      {% for prod in product %}
+        <div class="card" style="width: 18rem;">
+            <img src="/media/{{ prod.product_image }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ prod.product_name }}</h5>
+            <p class="card-text">{{ prod.product_desc }}</p>
+            <button id="pr{{ prod.id }}" class="btn btn-primary cart">Add to Cart</button>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 and not forloop.last %}
+          </div><div class="carousel-item">
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <a class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ forloop.counter }}" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon bg-warning border rounded-circle border-primary rounded" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ forloop.counter }}" data-bs-slide="next">
+    <span class="carousel-control-next-icon bg-warning border rounded-circle border-primary rounded" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
