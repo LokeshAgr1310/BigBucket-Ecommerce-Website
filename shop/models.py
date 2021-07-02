@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Product(models.Model):
+
+    # TODO: creating fulldesc and short desc
     product_no = models.IntegerField(default=1)
     product_name = models.CharField(max_length=50)
     category = models.CharField(max_length=50, default="")
@@ -13,3 +15,14 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=70)
+    phone = models.IntegerField()
+    desc = models.TextField(max_length=700)
+    pub_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.name
