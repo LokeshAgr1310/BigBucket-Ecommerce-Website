@@ -1,8 +1,41 @@
 {% extends "shop/base.html" %}
+{% load static %}
 
 
-{% block title %}ProductView - Shop|Big Bucket{% endblock  %}
+{% block title %}{{ product.product_name }} - Shop|Big Bucket{% endblock  %}
+
+{% block css %}
+    <style>
+        *{
+          font-family: 'Josefin Sans', sans-serif;
+        }
+        .price-color{
+            color: #B12704;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    <p>This is our product details page...</p>
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-md-4 border-end border-secondary">
+                <img src="/media/{{ product.product_image }}" alt="" class="img-fluid">
+            </div>
+            <div class="col-md-8">
+                <h3 class="fw-bolder">{{ product.product_name }}</h3>
+                <p class="lead">{{ product.product_desc }}</p>
+                <p>
+                    <span class="text-secondary">Price: </span>
+                    <sup><i class='bx bx-rupee price-color fs-5'></i></sup>
+                    <span class="price-color fw-bolder fs-3">{{ product.price }}</span>
+                </p>
+                <button id="pr{{ product.id }}" class="btn btn-primary cart mx-3">Add to Cart</button>
+                <button id="bn{{ product.id }}" class="btn btn-primary">Buy Now</button>
+            </div>
+        </div>
+    </div>
 {% endblock  %}
+
+{% block js %}
+    <script src="{% static 'shop/js/productView.js' %}"></script>
+{% endblock %}
