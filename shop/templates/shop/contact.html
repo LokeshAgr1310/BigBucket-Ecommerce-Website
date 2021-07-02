@@ -1,8 +1,40 @@
 {% extends "shop/base.html" %}
-
+{% load static %}
 
 {% block title %}Contact - Shop|Big Bucket{% endblock  %}
 
 {% block body %}
-    <p>This is our contact page...</p>
+    {# TODO: Making the alert when contact form is saved #}
+    <!--<div class="alert alert-success alert-dismissible fade text-center" id="contactFormAlert" role="alert">
+        <strong>Your contact form is submitted successfully!!!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> -->
+    <div class="container my-4">
+        <h3>Contact Our Team</h3>
+        <form action="{% url 'shop:ContactUs' %}" method="post">
+        {% csrf_token %}
+            <div class="form-group my-3">
+                <label for="name" class="form-label">Name: </label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Enter Your Name">
+            </div>
+            <div class="form-group my-3">
+                <label for="email" class="form-label">Email-Address: </label>
+                <input type="email" id="name" name="email" class="form-control" placeholder="Enter Your Email Address">
+            </div>
+            <div class="form-group my-3">
+                <label for="phone" class="form-label">Phone Number: </label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter Your Phone Number">
+            </div>
+            <div class="form-group my-3">
+                <label for="desc">Describe your Problem/Query</label>
+                <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    
 {% endblock  %}
+
+{% block js %}
+    <script src="{% static 'shop/js/contact.js' %}"></script>
+{% endblock %}
