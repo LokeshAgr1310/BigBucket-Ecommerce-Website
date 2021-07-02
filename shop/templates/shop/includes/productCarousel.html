@@ -16,6 +16,10 @@
             <h5 class="card-title">{{ prod.product_name }}</h5>
             <p class="card-text">{{ prod.product_desc }}</p>
             <button id="pr{{ prod.id }}" class="btn btn-primary cart">Add to Cart</button>
+            <a href="{% url 'shop:ProductView' prod.id %}">
+              <button id="qv{{ prod.id }}" class="btn btn-primary">Quick View
+              </button>
+            </a>
           </div>
         </div>
         {% if forloop.counter|divisibleby:3 and not forloop.last %}

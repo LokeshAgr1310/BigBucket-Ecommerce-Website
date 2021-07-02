@@ -51,13 +51,15 @@
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Coming Soon</a>
             </li>
           </ul>
+          {% if request.get_full_path != "/shop/contact/" and request.get_full_path != "/shop/about/" %}
+            <a tabindex="0" class="btn btn-secondary mx-2" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-placement="bottom" data-bs-html="true" data-bs-content="And here's some amazing content. It's very engaging. Right?" id="popcart">
+            Cart(<span id="cartCount">0</span>)
+            </a>
+          {% endif %}
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
-          <button type="button" id="popcart" class="btn btn-secondary mx-2" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-            Cart (<span id="cartCount">0</span>)
-          </button>
         </div>
       </div>
     </nav>
