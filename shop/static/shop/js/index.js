@@ -41,13 +41,14 @@ function updatePopOverCart(cart)
     }
     popStr = popStr + `<a href='/shop/checkout/' class='btn btn-primary mx-2' id='checkout'>Checkout</a><button class='btn btn-primary' id='clearCart' onClick='clearCart()'>Clear Cart</button>`;
             
+    // setting the popover-body content
     document.getElementById('popcart').setAttribute('data-bs-content', popStr);
     popOverCart.show()
     
 }
 
 function clearCart(){
-    // TODO: Clear the = - button and addto cart button without refresh
+    // TODO: Clear the = - button and add to cart button without refresh
     cart = JSON.parse(localStorage.getItem('cart'))
     for (key in cart){
         $(`#prodQuant${key}`).innerText = `<button id='${key}' class="btn btn-primary cart">Add to Cart</button>`
@@ -109,7 +110,6 @@ else{
 $('.cart').click(function(){
     // taking id of the clicked item
     let idStr = this.id.toString();
-    console.log(idStr);
     // if(cart[idStr]){
     //     qty = cart[idStr] + 1;
     // }
@@ -119,6 +119,7 @@ $('.cart').click(function(){
     //     cart[idStr] = [qty, productName]
     // }
 
+    // creating the cart with product quantity and the product name
     productName = document.getElementById(`productName${idStr}`).innerHTML;
     qty = 1;    
     cart[idStr] = [qty, productName];
