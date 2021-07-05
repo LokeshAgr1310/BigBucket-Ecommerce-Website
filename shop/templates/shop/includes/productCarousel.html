@@ -13,9 +13,11 @@
         <div class="card" style="width: 18rem;">
             <img src="/media/{{ prod.product_image }}" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">{{ prod.product_name }}</h5>
+            <h5 class="card-title" id="productNamepr{{ prod.id }}">{{ prod.product_name }}</h5>
             <p class="card-text">{{ prod.product_desc }}</p>
-            <button id="pr{{ prod.id }}" class="btn btn-primary cart">Add to Cart</button>
+            <span id="prodQuantpr{{ prod.id }}" class="prodQuant">
+              <button id="pr{{ prod.id }}" class="btn btn-primary cart">Add to Cart</button>
+            </span>
             <a href="{% url 'shop:ProductView' prod.id %}">
               <button id="qv{{ prod.id }}" class="btn btn-primary">Quick View
               </button>
