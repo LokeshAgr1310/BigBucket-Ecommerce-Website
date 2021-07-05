@@ -1,5 +1,17 @@
-// checking local storage
+// initialize some global variable
 let cart;
+let count = 0;
+
+// some useful function which is used globally..
+// function to get the count the quantity of product that is in cart
+function getCartCount(cart){
+    Object.keys(cart).forEach(function(key){
+        count += cart[key][0];
+    });
+    return count;
+};
+
+// checking local storage
 if(localStorage.getItem('cart') == null){
     cart = {};
 }
@@ -7,7 +19,8 @@ else{
     // if found then parse it to python dict 
     // and change the text in the cartCount
     cart = JSON.parse(localStorage.getItem('cart'));
-    document.getElementById('cartCount').innerHTML = Object.keys(cart).length;
+    count = 0;
+    document.getElementById('cartCount').innerHTML = getCartCount(cart);
 }
 $('.cart').click(function(){
     // taking id of the clicked item
@@ -24,7 +37,8 @@ $('.cart').click(function(){
 
     // save the cart in the localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
-    document.getElementById('cartCount').innerHTML = Object.keys(cart).length;
+    count = 0;
+    document.getElementById('cartCount').innerHTML = getCartCount(count);
 })
 
 // intialize the cart-popover
