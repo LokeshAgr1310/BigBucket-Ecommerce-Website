@@ -52,7 +52,7 @@
             </li>
           </ul>
           {% if request.get_full_path != "/shop/contact/" and request.get_full_path != "/shop/about/" %}
-            <a tabindex="0" class="btn btn-secondary mx-2" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-placement="bottom" data-bs-html="true" data-bs-content="And here's some amazing content. It's very engaging. Right?" id="popcart">
+            <a tabindex="0" class="btn btn-secondary mx-2" role="button" data-bs-toggle="popover" title="Cart Items" data-bs-placement="bottom" data-bs-html="true" data-bs-content="<a href='/shop/checkout/' class='btn btn-primary mx-2' id='checkout'>Checkout</a><button class='btn btn-primary' id='clearCart' onClick='clearCart()'>Clear Cart</button>" id="popcart" data-bs-custom-class="popover">
             Cart(<span id="cartCount">0</span>)
             </a>
           {% endif %}
