@@ -1,8 +1,61 @@
+<!-- TODO: Add Quick View in Checkout -->
 {% extends "shop/base.html" %}
-
+{% load static %}
 
 {% block title %}Order Checkout - Shop|Big Bucket{% endblock  %}
 
 {% block body %}
-    <p>This is our order checkout page...</p>
+    <div class="container">
+        <div class="col my-5">
+            <h2>Step 1 - BigBucket Express Checkout - Review Your Cart items </h2>
+            <div>
+                <ul class="list-group my-4" id='items'>
+                </ul>
+            </div>
+        </div>
+        <div class="col my-5">
+            <h2>Step 2 - Enter Address and & Other Details </h2>
+            <form class="row g-3 my-3">
+                <div class="col-md-4">
+                    <label for="inputName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="Enter Your Name" name="inputName">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter Your Email" name="inputEmail">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputPhone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="inputPhone" placeholder="Enter Your Phone Number" name="inputPhone">
+                </div>
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="inputPhone">
+                </div>
+                <div class="col-12">
+                    <label for="inputAddressLine" class="form-label">Address Line 2</label>
+                    <input type="text" class="form-control" id="inputAddressLine" placeholder="Apartment, studio, or floor" name="inputAddress">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputCity" class="form-label">City</label>
+                    <input type="text" class="form-control" id="inputCity" name="inputAddressLine">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label">State</label>
+                    <input type="text" class="form-control" id="inputState" name="inputState">
+                </div>
+                <div class="col-md-2">
+                    <label for="inputZip" class="form-label">Zip</label>
+                    <input type="text" class="form-control" id="inputZip" name="inputZip">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Place Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock  %}
+
+{% block js %}
+    <script src="{% static 'shop/js/ordercheckout.js' %}"></script>
 {% endblock  %}
