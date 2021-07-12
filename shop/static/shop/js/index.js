@@ -121,8 +121,9 @@ $('.cart').click(function(){
 
     // creating the cart with product quantity and the product name
     productName = document.getElementById(`productName${idStr}`).innerHTML;
+    productPrice = document.getElementById(`price${idStr}`).innerHTML;
     qty = 1;    
-    cart[idStr] = [qty, productName];
+    cart[idStr] = [qty, productName, parseInt(productPrice)];
     updateCart(cart, idStr);
 })
 
