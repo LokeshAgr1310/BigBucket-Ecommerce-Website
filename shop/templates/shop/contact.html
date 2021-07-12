@@ -9,6 +9,11 @@
         <strong>Your contact form is submitted successfully!!!</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div> -->
+    {% if messages %}
+        {% for message in messages %}
+        <div class="bg-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %} text-center py-3 text-white">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
     <div class="container my-4">
         <h3>Contact Our Team</h3>
         <form action="{% url 'shop:ContactUs' %}" method="post">

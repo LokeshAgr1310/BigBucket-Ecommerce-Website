@@ -1,4 +1,5 @@
 <!-- TODO: Add Quick View in Checkout -->
+<!--TODO: After ordered placed send mail to the specified email and an message to the specified Phone Number  --> 
 {% extends "shop/base.html" %}
 {% load static %}
 
@@ -6,47 +7,49 @@
 
 {% block body %}
     <div class="container">
-        <div class="col my-5">
+        <div class="col my-5 pb-3">
             <h2>Step 1 - BigBucket Express Checkout - Review Your Cart items </h2>
             <div>
-                <ul class="list-group my-4" id='items'>
+                <ul class="list-group" id='items'>
                 </ul>
             </div>
         </div>
         <div class="col my-5">
             <h2>Step 2 - Enter Address and & Other Details </h2>
-            <form class="row g-3 my-3">
+            <form class="row g-3 my-3" method="post" action="/shop/checkout/">
+                {% csrf_token %}
+                <input type="hidden" id="itemsJson" name="itemsJson">
                 <div class="col-md-4">
                     <label for="inputName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Enter Your Name" name="inputName">
+                    <input type="text" class="form-control" id="inputName" placeholder="Enter Your Name" name="inputName" required>
                 </div>
                 <div class="col-md-4">
                     <label for="inputEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter Your Email" name="inputEmail">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter Your Email" name="inputEmail" required>
                 </div>
                 <div class="col-md-4">
                     <label for="inputPhone" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="inputPhone" placeholder="Enter Your Phone Number" name="inputPhone">
+                    <input type="tel" class="form-control" id="inputPhone" placeholder="Enter Your Phone Number" name="inputPhone" required>
                 </div>
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="inputPhone">
+                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="inputAddress" required>
                 </div>
                 <div class="col-12">
                     <label for="inputAddressLine" class="form-label">Address Line 2</label>
-                    <input type="text" class="form-control" id="inputAddressLine" placeholder="Apartment, studio, or floor" name="inputAddress">
+                    <input type="text" class="form-control" id="inputAddressLine" placeholder="Apartment, studio, or floor" name="inputAddressLine">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
-                    <input type="text" class="form-control" id="inputCity" name="inputAddressLine">
+                    <input type="text" class="form-control" id="inputCity" name="inputCity" required>
                 </div>
                 <div class="col-md-4">
                     <label for="inputState" class="form-label">State</label>
-                    <input type="text" class="form-control" id="inputState" name="inputState">
+                    <input type="text" class="form-control" id="inputState" name="inputState" required>
                 </div>
                 <div class="col-md-2">
                     <label for="inputZip" class="form-label">Zip</label>
-                    <input type="text" class="form-control" id="inputZip" name="inputZip">
+                    <input type="text" class="form-control" id="inputZip" name="inputZip" required>
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Place Order</button>
@@ -57,5 +60,13 @@
 {% endblock  %}
 
 {% block js %}
+    <script>
+        {% if ordered %}
+            // TODO: Make use of Django messages
+            alert('Your order is placed successfully...')
+            localStorage.clear()
+            document.location = '/shop';
+        {% endif %}
+    </script>
     <script src="{% static 'shop/js/ordercheckout.js' %}"></script>
 {% endblock  %}

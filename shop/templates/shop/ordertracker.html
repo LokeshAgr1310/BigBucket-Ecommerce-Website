@@ -1,8 +1,46 @@
 {% extends "shop/base.html" %}
+{% load static %}
 
 
 {% block title %}Order Tracker - Shop|Big Bucket{% endblock  %}
 
 {% block body %}
-    <p>This is our order tracker page...</p>
+    <div class="container">
+        <div class="col my-5">
+            <h2>BigBucket Order Tracker - Track Your Order</h2>
+            <form class="row g-3 my-3" method="post" action="#" id="trackerForm">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <label for="inputName" class="form-label">Order Id</label>
+                    <input type="number" class="form-control" id="orderId" placeholder="Enter Your Order Id" name="orderId" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter Your Email" name="inputEmail" required>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary text-center">Track Order</button>
+                </div>
+            </form>
+        </div>
+        <div class="col my-5">
+            <h2>Your Order Status: </h2>
+            <div>
+                <ul class="list-group my-4" id='items'>
+                    <p>Enter Your OrderId and email to track your order...</p>
+                </ul>
+            </div>
+        </div>
+        <div class="col my-5">
+            <h2>Your Order Details: </h2>
+            <div>
+                <ul class="list-group my-4" id='productItems'>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock  %}
+
+{% block js %}
+    <script src="{% static 'shop/js/ordertracker.js' %}"></script>
 {% endblock  %}

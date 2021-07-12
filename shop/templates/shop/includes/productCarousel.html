@@ -15,6 +15,11 @@
           <div class="card-body">
             <h5 class="card-title" id="productNamepr{{ prod.id }}">{{ prod.product_name }}</h5>
             <p class="card-text">{{ prod.product_desc }}</p>
+            <p>
+              <span class="text-secondary">Price: </span>
+              <sup><i class='bx bx-rupee price-color fs-6'></i></sup>
+              <span class="price-color fw-bolder fs-4" id="pricepr{{ prod.id }}">{{ prod.price }}</span>
+            </p>
             <span id="prodQuantpr{{ prod.id }}" class="prodQuant">
               <button id="pr{{ prod.id }}" class="btn btn-primary cart">Add to Cart</button>
             </span>
