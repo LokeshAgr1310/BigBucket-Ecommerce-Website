@@ -26,3 +26,25 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+class Order(models.Model):
+    itemsJson = models.CharField(max_length=100000)
+    customerName = models.CharField(max_length=100)
+    customerEmail = models.CharField(max_length=200)
+    customerPhone = models.IntegerField()
+    customerAddress = models.CharField(max_length=400)
+    customerCity = models.CharField(max_length=100)
+    customerState = models.CharField(max_length=100)
+    customerZipCode = models.CharField(max_length=10)
+    orderDate = models.DateTimeField()
+
+    def __str__(self):
+        return self.customerName
+
+class OrderUpdate(models.Model):
+    order_id = models.IntegerField(default="")
+    orderUpdateDesc = models.CharField(max_length=5000, default="")
+    updateTimeStamp = models.DateTimeField() 
+
+    def __str__(self):
+        return self.orderUpdateDesc[:10] + "..."
