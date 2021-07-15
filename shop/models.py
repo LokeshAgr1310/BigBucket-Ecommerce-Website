@@ -37,6 +37,9 @@ class Order(models.Model):
     customerState = models.CharField(max_length=100)
     customerZipCode = models.CharField(max_length=10)
     orderDate = models.DateTimeField()
+    payment_id = models.CharField(default="", max_length=1000)
+    payment_status = models.BooleanField(default=False)
+    amount = models.IntegerField(default=0)
 
     def __str__(self):
         return self.customerName
