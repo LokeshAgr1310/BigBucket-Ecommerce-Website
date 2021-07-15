@@ -1,0 +1,33 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Handle Payment - Shop|Big Bucket{% endblock  %}
+
+{% block body %}
+    <h3>Redirecting to Payment Gateway....</h3>
+{% endblock %}
+
+{% block js %}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            "key": "rzp_test_7YRG7ij89HTfP3",
+            "name": "{{ customerName }}",
+            "description": "BigBucket Orders",
+            "image": "{% static 'shop/img/logo.png' %}",
+            "order_id": "{{ order.id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "callback_url": "http://localhost:8000/shop/payment_success/",
+            "prefill": {
+                "name": "{{ customerName }}",
+                "email": "{{ customerEmail }}",
+                "contact": "{{ customerPhone }}"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        console.log(options)
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    </script>
+{% endblock  %}
