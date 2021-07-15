@@ -59,3 +59,5 @@ $('#itemsJson').attr('value', JSON.stringify(cart))
 //     localStorage.clear();
 //     document.location = '/shop';
 // }
+
+$('#amount').val(totalPrice)

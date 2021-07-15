@@ -44,6 +44,5 @@ $('#trackerForm').submit(function(e){
             </li>`
             $('#productItems').append(myStr);
         }
-        console.log(cart);
     })
 })
