@@ -1,8 +1,57 @@
 {% extends "shop/base.html" %}
-
+{% load static %}
 
 {% block title %}Search Product - Shop|Big Bucket{% endblock  %}
 
-{% block body %}
-    <p>This is our search page...</p>
+{% block css %}
+    <style>
+        *{
+            font-family: 'Josefin Sans', sans-serif;
+        }
+        .price-color{
+            color: #B12704;
+        }
+    </style>
 {% endblock  %}
+
+{% block body %}
+    <div class="container my-4">
+        {% if query|length != 0 and msg|length == 0 %}
+            <h3>You are Searching for {{ query }}</h3>
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="/media/{{ product.product_image }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title" id="productNamepr{{ product.id }}">{{ product.product_name }}</h5>
+                                <p class="card-text">{{ product.product_desc }}</p>
+                                <p>
+                                <span class="text-secondary">Price: </span>
+                                <sup><i class='bx bx-rupee price-color fs-6'></i></sup>
+                                <span class="price-color fw-bolder fs-4" id="pricepr{{ product.id }}">{{ product.price }}</span>
+                                </p>
+                                <span id="prodQuantpr{{ product.id }}" class="prodQuant">
+                                <button id="pr{{ product.id }}" class="btn btn-primary cart">Add to Cart</button>
+                                </span>
+                                <a href="{% url 'shop:ProductView' product.id %}">
+                                <button id="qv{{ product.id }}" class="btn btn-primary">Quick View
+                                </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                        </div><div class="row">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <h1 class="text-center">No Search Found!!!</h1>
+        {% endif %}
+    </div>
+{% endblock  %}
+
+{% block js %}
+    <script src="{% static 'shop/js/index.js' %}"></script>
+{% endblock %}
