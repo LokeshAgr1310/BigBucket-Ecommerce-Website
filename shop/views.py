@@ -1,3 +1,5 @@
+from django import contrib
+from django.db.models.expressions import F
 from django.shortcuts import render, redirect
 from .models import Product, Contact, Order, OrderUpdate
 from django.utils import timezone
@@ -80,18 +82,37 @@ def TrackerView(request):
                 orderUpdates = []
                 for order in orderUpdate:
                     orderUpdates.append({'desc': order.orderUpdateDesc, 'updateDate': order.updateTimeStamp})
-                response = json.dumps([orderUpdates, orders[0].itemsJson], default=str)
+                response = json.dumps({'status': 'success', 'updates': orderUpdates, 'itemsJson': orders[0].itemsJson}, default=str)
                 return HttpResponse(response)
             else:
-                return HttpResponse('{}')
+                return HttpResponse({'status': 'noItem'})
         except Exception as E:
-            return HttpResponse('{}')
+            return HttpResponse({'status': 'error'})
     return render(request, 'shop/ordertracker.html')
 
-
+def queryMatch(query, product):
+    query = query.lower()
+    if (query in product.product_name.lower()) or (query in product.category.lower()) or (query in product.sub_category.lower()) or (query in product.product_desc.lower()):
+        return True
+    return False
 
 def SearchView(request):
-    return render(request, 'shop/search.html')
+    if request.method == 'GET':
+        context = {}
+        query = request.GET.get('search')
+        products = Product.objects.all()
+        queryMatchedProducts = [product for product in products if queryMatch(query, product)]
+
+        if len(queryMatchedProducts)>0:
+            context = {
+                'query': query,
+                'products': queryMatchedProducts,
+                'msg': "",
+            }
+        else:
+            context['msg']  = "No seach Found"
+        return render(request, 'shop/search.html', context)
+
 
 
 
