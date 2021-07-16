@@ -24,17 +24,20 @@ if(Object.keys(cart).length != 0){
         let productPrice = cart[key][2];
         totalPrice += productPrice*qty;
         totalQty += qty;
-        myStr = `<li class="list-group-item d-flex justify-content-between align-items-center">
-            ${productName}
-            <div class="d-inline-block" >
-                <span class="text-secondary">Price: </span>
-                <sup><i class='bx bx-rupee price-color fs-6' style="color: #B12704;"></i></sup>
-                <span class="price-color fw-bolder fs-4 me-2" style="color: #B12704;">${productPrice}</span>
-                <span class="text-secondary">Qty: </span>
-                <span class="badge rounded-pill bg-primary">${qty}</span>
-            </div>
-        </li>`
-        ulItem.append(myStr);
+        if(qty != 0)
+        {
+            myStr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                ${productName}
+                <div class="d-inline-block" >
+                    <span class="text-secondary">Price: </span>
+                    <sup><i class='bx bx-rupee price-color fs-6' style="color: #B12704;"></i></sup>
+                    <span class="price-color fw-bolder fs-4 me-2" style="color: #B12704;">${productPrice}</span>
+                    <span class="text-secondary">Qty: </span>
+                    <span class="badge rounded-pill bg-primary">${qty}</span>
+                </div>
+            </li>`
+            ulItem.append(myStr);
+        }
     }
     newStr = `<p style="float: right; border-bottom: 1px solid rgba(0,0,0,.125);"><span class="text-secondary">TotalPrice: </span>
     <sup><i class='bx bx-rupee price-color fs-6' style="color: #B12704;"></i></sup>

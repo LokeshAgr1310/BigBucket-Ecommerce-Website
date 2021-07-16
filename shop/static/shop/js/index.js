@@ -66,15 +66,16 @@ function clearCart(){
 function updateCart(cart, key){
     // checking the respective key have null or not
     // if null or 0 then productQuantity will be zero
-    if(cart[key][0]){
+    if(cart[key][0] != 0){
         productQuantity = cart[key][0];
+        // changing the HTML of the "Add To cart" button
+        document.getElementById(`prodQuant${key}`).innerHTML = `<button class="btn btn-primary minus mx-2" id="minus${key}">-</button><span class="quant" id="val${key}">${productQuantity}</span><button class="btn btn-primary mx-2 plus" id="plus${key}">+</button>`
     }
     else{
-        productQuantity = 0;
+        $(`#prodQuant${key}`).innerHTML = `<button id='${key}' class="btn btn-primary cart">Add to Cart</button>`
+        delete cart[key];
     }
 
-    // changing the HTML of the "Add To cart" button
-    document.getElementById(`prodQuant${key}`).innerHTML = `<button class="btn btn-primary minus mx-2" id="minus${key}">-</button><span class="quant" id="val${key}">${productQuantity}</span><button class="btn btn-primary mx-2 plus" id="plus${key}">+</button>`
 
     // set the item to the local storage
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -142,7 +143,7 @@ $('.prodQuant').on("click", 'button.minus', function(){
     }
     cart[productId][0] = Math.max(0, cart[productId][0]);
     $(`#val${productId}`).innerHTML = cart[productId][0];
-    updateCart(cart, productId) 
+    updateCart(cart, productId)
 })
 
 // when someone cliced + button of any product
